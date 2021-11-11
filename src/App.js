@@ -30,8 +30,8 @@ function App() {
   }, [])
 
 
-  const handleAddToCart = (obj) => {
-    setCart([...cart, obj])
+  const handleAddToCart = (obj_id, count) => {
+    setCart([...cart, {obj_id: count}])
   }
 
   const handleRemoveFromCart = (obj_id) => {
@@ -50,7 +50,7 @@ function App() {
       <Navigational cart={cart}/>
         <Routes>
           <Route path='/' element={<Home products={products} cart={cart} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>}/>
-          <Route path='/product/:id' element={<ProductPage />}>
+          <Route path='/product/:id' element={<ProductPage addToCart={handleAddToCart}/>}>
           </Route>
         </Routes>
     </div>

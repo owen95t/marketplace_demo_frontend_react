@@ -3,7 +3,21 @@ import {Button, Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 
-const Product = ({product}) => {
+const Product = ({product, addToCart}) => {
+    const calculateDiscount = (original, percent) => {
+        let newPrice = original * (1-(percent/100))
+        if(percent > 0){
+            return (
+                <>
+                    <strike>฿ {original} </strike><strong>  ฿ {newPrice.toFixed(2)}</strong>
+                </>
+            )
+        }
+        return (
+            <strong>฿ {original}</strong>
+        )
+    }
+
     return (
         // <div className='product'>
         //     <div className='product_info'>
@@ -24,6 +38,10 @@ const Product = ({product}) => {
                 <Card.Text>
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
+                </Card.Text>
+                <Card.Text>
+                    {calculateDiscount(product.item_price, product.item_discount)}
+                    {/*<strong>฿ {product.item_price}</strong>*/}
                 </Card.Text>
                 <div style={{display: "flex"}}>
                     {Array(product.item_rating).fill().map((e, i) => {
