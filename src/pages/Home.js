@@ -3,12 +3,13 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import Product from "../components/Product";
 import ProductCarousel from "../components/ProductCarousel";
 import '../css/home.css'
+import {useState} from "react";
 
-const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
+const Home = ({products, cart, addToCart, getCartAmount, removeFromCart}) => {
     const sample = [
         {
             "_id": "618b82d1ce8f8f40f23e4096",
-            "item_name": "test24ggg",
+            "item_name": "best1",
             "item_desc": "testdesc",
             "item_price": 123.45,
             "item_discount": 0,
@@ -21,7 +22,7 @@ const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
         },
         {
             "_id": "618b82d1ce8f8f40f23e4096",
-            "item_name": "test25ggg",
+            "item_name": "best2",
             "item_desc": "testdesc",
             "item_price": 123.45,
             "item_discount": 0,
@@ -34,7 +35,7 @@ const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
         },
         {
             "_id": "618b82d1ce8f8f40f23e4096",
-            "item_name": "test26ggg",
+            "item_name": "best3",
             "item_desc": "testdesc",
             "item_price": 123.45,
             "item_discount": 0,
@@ -47,7 +48,7 @@ const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
         },
         {
             "_id": "618b82d1ce8f8f40f23e4096",
-            "item_name": "test27ggg",
+            "item_name": "best4",
             "item_desc": "testdesc",
             "item_price": 123.45,
             "item_discount": 0,
@@ -60,7 +61,7 @@ const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
         },
         {
             "_id": "618b82d1ce8f8f40f23e4096",
-            "item_name": "test28ggg",
+            "item_name": "best5",
             "item_desc": "testdesc",
             "item_price": 123.45,
             "item_discount": 0,
@@ -73,7 +74,7 @@ const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
         },
         {
             "_id": "618b82d1ce8f8f40f23e4096",
-            "item_name": "test29ggg",
+            "item_name": "best6",
             "item_desc": "testdesc",
             "item_price": 123.45,
             "item_discount": 0,
@@ -86,9 +87,10 @@ const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
         }
     ]
 
+
     return (
         <Container>
-            <ProductCarousel products={sample}/>
+
             <Row className='' style={{borderBottom: '2px solid black'}}>
                 <Col>
                     <h1 className='mt-5 text-start'>Our Best Sellers</h1>
@@ -97,11 +99,21 @@ const Home = ({cart, addToCart, getCartAmount, removeFromCart}) => {
                     <Button className='mt-5 float-end'>View All</Button>
                 </Col>
             </Row>
+            <ProductCarousel products={sample}/>
             <Row className='' style={{borderBottom: '2px solid black'}}>
                 <Col>
                     <h1 className='mt-5 text-start'>All Products</h1>
                 </Col>
             </Row>
+            <div style={{display: 'flex', flexWrap: "wrap"}}>
+                {products.length > 0 ? products.map((e, i) => {
+                    if(e.item_status){
+                        return (
+                            <Product key={i} product={e}/>
+                        )
+                    }
+                }) : <></>}
+            </div>
         </Container>
     )
 }
