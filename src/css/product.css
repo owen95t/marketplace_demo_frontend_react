@@ -1,0 +1,19 @@
+.product {
+    outline-style: solid;
+}
+
+.product_name {
+
+}
+
+.product_description {
+
+}
+
+.product_rating {
+    display: flex;
+}
+
+.product_price {
+
+}
