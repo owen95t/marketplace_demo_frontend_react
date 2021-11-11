@@ -1,5 +1,5 @@
-import {Navbar, Container, Nav, NavDropdown, Badge} from "react-bootstrap";
-import {useEffect} from "react";
+import {Navbar, Container, Nav, Badge} from "react-bootstrap";
+// import {useEffect} from "react";
 
 const Navigational = ({cart, setShowModal}) => {
 
@@ -25,7 +25,7 @@ const Navigational = ({cart, setShowModal}) => {
                             <Nav.Link eventKey="link-1" onClick={() => setShowModal(true)}>Cart  <Badge>{cart.length}</Badge></Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="/">Login</Nav.Link>
+                            <Nav.Link href="/login" to='/login'>Login</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="link-1">Account</Nav.Link>

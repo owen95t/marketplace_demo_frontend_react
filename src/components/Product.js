@@ -1,7 +1,7 @@
 import '../css/product.css'
-import {Button, Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {AiFillStar, AiOutlineStar} from "react-icons/all";
+import {Rating} from "@mui/material";
 
 const Product = ({product, addToCart}) => {
     const calculateDiscount = (original, percent) => {
@@ -35,21 +35,19 @@ const Product = ({product, addToCart}) => {
             <Card.Img variant="top" src="holder_image.jpeg" />
             <Card.Body>
                 <Card.Title>{product.item_name}</Card.Title>
-                <Card.Text>
-                    Example product description here
-                    Description from json: {product.item_desc}
-                </Card.Text>
+                {/*<Card.Text>*/}
+                {/*    Example product description here*/}
+                {/*    Description from json: {product.item_desc}*/}
+                {/*</Card.Text>*/}
                 <Card.Text>
                     {calculateDiscount(product.item_price, product.item_discount)}
                     {/*<strong>฿ {product.item_price}</strong>*/}
                 </Card.Text>
                 <div style={{display: "flex"}}>
-                    {Array(product.item_rating).fill().map((e, i) => {
+                    <Rating
+                        value={product.item_rating}
 
-                        return (
-                            <AiFillStar/>
-                        )
-                    })}
+                    />
                 </div>
                 <Link to={`product/${product._id}`} className='stretched-link'>More Info</Link>
             </Card.Body>

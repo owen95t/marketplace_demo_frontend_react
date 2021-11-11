@@ -1,11 +1,16 @@
 import {Button, Container, Form} from "react-bootstrap";
+import '../css/form.css'
+import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
 
-const UserForm = () => {
+const Login = () => {
+
     return (
-        <>
-            <Form onSubmit={handleSubmit}>
+        <div className='Login'>
+            <Form className='login-control'>
+                <h1>Login</h1>
                 <Form.Group size="lg" controlId="email">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label className='float-start'>Email</Form.Label>
                     <Form.Control
                         autoFocus
                         type="email"
@@ -14,20 +19,23 @@ const UserForm = () => {
                     />
                 </Form.Group>
                 <Form.Group size="lg" controlId="password">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className='float-start mt-3'>Password</Form.Label>
                     <Form.Control
                         type="password"
                         //value={password}
                         //onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button block size="lg" type="submit" //disabled={!validateForm()}
+                <Button className='mt-4' type="submit" //disabled={!validateForm()}
                 >
                     Login
                 </Button>
+                <div>
+                    <Link to='/register'>Register</Link>
+                </div>
             </Form>
-        </>
+        </div>
     )
 }
 
-export default UserForm
+export default Login

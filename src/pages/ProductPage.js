@@ -2,9 +2,11 @@ import {Button, Col, Container, FormControl, Image, InputGroup} from "react-boot
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import customAxios from "../axios/customAxios";
+import {Rating} from "@mui/material";
+import banana from '../banana.jpeg'
 
 
-const ProductPage = ({addToCart}) => {
+const ProductPage = ({addToCart, setCartCount}) => {
     const params = useParams()
     const [product, setProduct] = useState()
     const [itemCount, setItemCount] = useState(1)
@@ -45,20 +47,28 @@ const ProductPage = ({addToCart}) => {
         <>
             <Container style={{display: "flex", height: '35rem', marginTop: '5rem'}}>
                 <Col className='justify-content-center'>
-                    <Image src="holder_image.jpeg" rounded/>
+                    <Image src={banana} rounded/>
                 </Col>
                 <Col>
                     <h1 className='text-start'>{product ? product.item_name : ""}</h1>
+                    <h5 className='text-start'>Description</h5>
                     <p className='text-start'>{product ? product.item_desc : ""}</p>
 
-                    <p className='text-start'>{product ? (product.item_discount > 0 ? calculateDiscount(product.item_price, product.item_discount) : product.item_price) : ""}</p>
+                    <p className='text-start'>฿ {product ? (product.item_discount > 0 ? calculateDiscount(product.item_price, product.item_discount) : product.item_price) : ""}</p>
 
+                    {product ? <Rating
+                        value={product.item_rating}
+                        className='float-start mb-3'
+                    /> :
+                    <Rating value={0}/>}
+                    <div style={{width: '110px'}}>
+                        <InputGroup className='mb-3'>
+                            <Button variant='outline-secondary' onClick={() => handleItemCount(-1)}>-</Button>
+                            <FormControl disabled value={itemCount} onChange={e => setItemCount(e.target.value)} style={{width: '1rem'}} className='text-end'/>
+                            <Button variant='outline-secondary' onClick={() => handleItemCount(1)}>+</Button>
+                        </InputGroup>
+                    </div>
 
-                    <InputGroup className='mb-3'>
-                        <Button variant='outline-secondary' onClick={() => handleItemCount(-1)}>-</Button>
-                        <FormControl disabled value={itemCount} style={{width: '1rem'}}/>
-                        <Button variant='outline-secondary' onClick={() => handleItemCount(1)}>+</Button>
-                    </InputGroup>
 
                     <div className='float-start'>
                         <Button onClick={() => addToCart(product._id, itemCount)} className='text-start'>Add To Cart</Button>

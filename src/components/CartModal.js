@@ -1,4 +1,4 @@
-import {Button, Container, Modal, Row} from 'react-bootstrap'
+import {Button, Container, Modal} from 'react-bootstrap'
 
 const CartModal = ({showModal, setShowModal, products}) => {
     return (
