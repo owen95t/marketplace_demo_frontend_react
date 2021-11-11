@@ -36,8 +36,8 @@ const Product = ({product, addToCart}) => {
             <Card.Body>
                 <Card.Title>{product.item_name}</Card.Title>
                 <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    Example product description here
+                    Description from json: {product.item_desc}
                 </Card.Text>
                 <Card.Text>
                     {calculateDiscount(product.item_price, product.item_discount)}
@@ -51,7 +51,7 @@ const Product = ({product, addToCart}) => {
                         )
                     })}
                 </div>
-                <Link to={`product/${product._id}`} className='stretched-link'>Go More Info</Link>
+                <Link to={`product/${product._id}`} className='stretched-link'>More Info</Link>
             </Card.Body>
         </Card>
     )

@@ -5,11 +5,13 @@ import Home from "./pages/Home";
 import {useEffect, useState} from "react";
 import ProductPage from "./pages/ProductPage";
 import customAxios from "./axios/customAxios";
+import CartModal from "./components/CartModal";
 
 function App() {
   const [cart, setCart] = useState([]);
   const [loaded, setLoaded] = useState(false)
   const [products, setProducts] = useState([])
+  const [showModal, setShowModal] = useState(false)
 
 
   const getProducts = async () => {
@@ -44,10 +46,15 @@ function App() {
     setCart([...newCart])
   }
 
+  const handleModal = (boo) => {
+    setShowModal(boo)
+  }
+
 
   return (
     <div className="App">
-      <Navigational cart={cart}/>
+      <Navigational cart={cart} setShowModal={handleModal}/>
+      <CartModal showModal={showModal} setShowModal={handleModal}/>
         <Routes>
           <Route path='/' element={<Home products={products} cart={cart} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>}/>
           <Route path='/product/:id' element={<ProductPage addToCart={handleAddToCart}/>}>

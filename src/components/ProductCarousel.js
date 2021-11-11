@@ -44,7 +44,7 @@ const ProductCarousel = ({products}) => {
             >
 
                 {products.map((product, i) => {
-                    if(product.item_status){
+                    if(product.item_status && product.item_rating > 4){
                         return (
                             <Product key={i} product={product}/>
                         )

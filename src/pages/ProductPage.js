@@ -60,10 +60,9 @@ const ProductPage = ({addToCart}) => {
                         <Button variant='outline-secondary' onClick={() => handleItemCount(1)}>+</Button>
                     </InputGroup>
 
-
+                    <div className='float-start'>
                         <Button onClick={() => addToCart(product._id, itemCount)} className='text-start'>Add To Cart</Button>
-
-
+                    </div>
                 </Col>
 
             </Container>
