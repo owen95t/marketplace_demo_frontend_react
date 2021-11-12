@@ -1,5 +1,5 @@
 import '../css/product.css'
-import {Card, Col, Row} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {Rating} from "@mui/material";
 

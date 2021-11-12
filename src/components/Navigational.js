@@ -3,7 +3,6 @@ import {useSelector} from "react-redux";
 import {count} from "../store/cart/cartSlice";
 
 const Navigational = ({setShowModal}) => {
-    const cart = useSelector((state) => state.cart.cart)
     const cartTotal = useSelector(count)
 
     return (
