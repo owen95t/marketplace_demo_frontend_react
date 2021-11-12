@@ -28,7 +28,7 @@ const Navigational = ({cart, setShowModal}) => {
                             <Nav.Link href="/login" to='/login'>Login</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link eventKey="link-1">Account</Nav.Link>
+                            <Nav.Link href='/account' to='/account'>Account</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

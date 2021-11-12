@@ -1,9 +1,9 @@
 import '../css/product.css'
-import {Card} from "react-bootstrap";
+import {Card, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {Rating} from "@mui/material";
 
-const Product = ({product, addToCart}) => {
+const Product = ({product}) => {
     const calculateDiscount = (original, percent) => {
         let newPrice = original * (1-(percent/100))
         if(percent > 0){
@@ -19,37 +19,27 @@ const Product = ({product, addToCart}) => {
     }
 
     return (
-        // <div className='product'>
-        //     <div className='product_info'>
-        //         <p className='product_name'>Name {product.item_name}</p> {/* Change to product.item_name */}
-        //         <p className='product_description'>Description</p>
-        //         <div className='product_rating'></div>
-        //         <p className='product_price'>
-        //             <small>฿</small>
-        //             <strong>400</strong>
-        //         </p>
-        //         <Button>Add to cart</Button>
-        //     </div>
-        // </div>
         <Card style={{ width: '18rem' }} className='m-auto mt-5 m-auto'>
             <Card.Img variant="top" src="holder_image.jpeg" />
             <Card.Body>
-                <Card.Title>{product.item_name}</Card.Title>
-                {/*<Card.Text>*/}
-                {/*    Example product description here*/}
-                {/*    Description from json: {product.item_desc}*/}
-                {/*</Card.Text>*/}
+                <Card.Title className='w-100'>
+                    <div className='text-start'>
+                        {product.item_name}
+                    </div>
+                </Card.Title>
                 <Card.Text>
-                    {calculateDiscount(product.item_price, product.item_discount)}
-                    {/*<strong>฿ {product.item_price}</strong>*/}
+                    <div className='text-start'>
+                        {calculateDiscount(product.item_price, product.item_discount)}
+                    </div>
+                    <div className='text-start mt-2'>
+                        <Rating
+                            value={product.item_rating}
+                        />
+                    </div>
+                    <div className='text-start'>
+                        <Link to={`product/${product._id}`} className='stretched-link'>More Info</Link>
+                    </div>
                 </Card.Text>
-                <div style={{display: "flex"}}>
-                    <Rating
-                        value={product.item_rating}
-
-                    />
-                </div>
-                <Link to={`product/${product._id}`} className='stretched-link'>More Info</Link>
             </Card.Body>
         </Card>
     )

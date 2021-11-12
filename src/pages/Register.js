@@ -1,9 +1,28 @@
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import '../css/form.css'
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import customAxios from "../axios/customAxios";
+import {useNavigate} from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const navigate = useNavigate()
+
+    const sendRegister = async () => {
+        await customAxios.post('users/register', {email: email, password: password}).then((result => {
+            if (result.status === 200) {
+                alert('Registration Successful!')
+                navigate('/login')
+            }
+        })).catch(e => {
+            if (e) {
+                console.log(e)
+                alert('Registration failed. Reason: ' + e.response.data.message)
+            }
+        })
+    }
 
     return (
         <div className='Login'>
@@ -14,20 +33,19 @@ const Login = () => {
                     <Form.Control
                         autoFocus
                         type="email"
-                        //value={email}
-                        //onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </Form.Group>
                 <Form.Group size="lg" controlId="password">
                     <Form.Label className='float-start mt-3'>Password</Form.Label>
                     <Form.Control
                         type="password"
-                        //value={password}
-                        //onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button className='mt-4' type="submit" //disabled={!validateForm()}
-                >
+                <Button className='mt-4' type="button" onClick={sendRegister}>
                     Register
                 </Button>
                 <div>
@@ -38,4 +56,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Register

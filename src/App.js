@@ -8,6 +8,7 @@ import customAxios from "./axios/customAxios";
 import CartModal from "./components/CartModal";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Account from "./pages/Account";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -83,7 +84,8 @@ function App() {
           <Route path='/' element={<Home products={products} cart={cart} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>}/>
           <Route path='/product/:id' element={<ProductPage addToCart={handleAddToCart}/>}/>
           <Route path='/login' element={<Login />}/>
-          <Route path='/register' element={<Register />}/>
+          <Route path='/register' element={<Register />} />
+          <Route path='/account' element={<Account/>} />
         </Routes>
     </div>
   )
