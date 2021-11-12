@@ -1,7 +1,13 @@
 import {Button, Container, Modal} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import {cartOjb, cart_qty, amount} from "../store/cart/cartSlice";
+import {useSelector} from "react-redux";
+import ProductInCart from "./ProductInCart";
 
 const CartModal = ({showModal, setShowModal, products}) => {
+    const cart = useSelector(cartOjb)
+    const cartQty = useSelector(cart_qty)
+    const cartAmount = useSelector(amount)
     return (
         <>
             <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -10,10 +16,10 @@ const CartModal = ({showModal, setShowModal, products}) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        {products ? "" : <p>Your Cart Is Empty!</p>}
+                        {cartQty ? (Object.values(cart).map((e, i) => <ProductInCart product={e} /> )) : <p>Your Car Is Empty!</p>}
                         <hr/>
                         <p className='float-start' style={{width: '50%'}}>Your Total: </p>
-                        <p className='float-end text-end' style={{width: '50%'}}>฿ 0</p>
+                        <p className='float-end text-end' style={{width: '50%'}}>฿ {cartAmount > 0 ? cartAmount : '0.00'}</p>
                     </Container>
                 <Modal.Footer>
                     <Link to='/cart'>

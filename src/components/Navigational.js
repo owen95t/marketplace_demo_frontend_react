@@ -1,6 +1,7 @@
 import {Navbar, Container, Nav, Badge} from "react-bootstrap";
 import {useSelector} from "react-redux";
 import {cart_qty} from "../store/cart/cartSlice";
+import {Link} from 'react-router-dom'
 
 const Navigational = ({setShowModal}) => {
     const cartTotal = useSelector(cart_qty)
@@ -8,11 +9,11 @@ const Navigational = ({setShowModal}) => {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="/">Marketplace</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/'>Marketplace</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to='/'>Home</Nav.Link>
                         {/*<Nav.Link href="">Link</Nav.Link>*/}
                         {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">*/}
                         {/*    <NavDropdown.Item href="">Action</NavDropdown.Item>*/}
@@ -27,10 +28,10 @@ const Navigational = ({setShowModal}) => {
                             <Nav.Link eventKey="link-1" onClick={() => setShowModal(true)}>Cart  <Badge>{cartTotal}</Badge></Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="/login" to='/login'>Login</Nav.Link>
+                            <Nav.Link as={Link} to='/login'>Login</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href='/account' to='/account'>Account</Nav.Link>
+                            <Nav.Link as={Link} to='/account'>Account</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

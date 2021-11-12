@@ -1,13 +1,16 @@
 import {Container, Col, Row, Button} from "react-bootstrap";
-import {useSelector} from "react-redux";
-import {cartOjb, cart_qty, amount} from "../store/cart/cartSlice";
+import {useSelector, useDispatch} from "react-redux";
+import {cartOjb, cart_qty, amount, clearCart} from "../store/cart/cartSlice";
 import '../css/checkout.css'
 import AddressForm from "../components/AddressForm";
+import ProductInCart from "../components/ProductInCart";
 
 const ShippingAndCart = () => {
     const cart = useSelector(cartOjb)
     const cartQty = useSelector(cart_qty)
     const cartAmount = useSelector(amount)
+    //const dispatchClearCart = useDispatch(clearCart)
+
     return (
         <Container>
             <h1 className='text-start mt-4'>Your Cart</h1>
@@ -23,6 +26,9 @@ const ShippingAndCart = () => {
                         <div>
                             <h3>Order Summary</h3>
                         </div>
+                        <hr/>
+                        {/*ProductInCart*/}
+                        {cartQty > 0 ? (Object.values(cart).map((e, i) => (<ProductInCart product={e}/>))) : 'Your Cart Is Empty'}
                         <hr/>
                         <div>
                             <Row className=''>
@@ -54,6 +60,7 @@ const ShippingAndCart = () => {
                         <Button variant='warning' className='w-100 mt-4'>
                             Checkout
                         </Button>
+                        {/*<Button variant='link' onClick={dispatchClearCart} className='mt-3 mb-0'>Clear Cart</Button>*/}
                     </div>
                 </Col>
             </Row>

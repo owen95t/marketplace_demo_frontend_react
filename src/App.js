@@ -11,7 +11,6 @@ import Register from "./pages/Register";
 import Account from "./pages/Account";
 import {useDispatch} from "react-redux";
 import {addToCart} from "./store/cart/cartSlice";
-// import Cart from "./pages/Cart";
 import ShippingAndCart from "./pages/ShippingAndCart";
 
 function App() {
