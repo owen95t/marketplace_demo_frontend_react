@@ -6,7 +6,7 @@ import {Rating} from "@mui/material";
 import banana from '../banana.jpeg'
 
 
-const ProductPage = ({addToCart, setCartCount}) => {
+const ProductPage = ({addToCart}) => {
     const params = useParams()
     const [product, setProduct] = useState()
     const [itemCount, setItemCount] = useState(1)
@@ -71,7 +71,7 @@ const ProductPage = ({addToCart, setCartCount}) => {
 
 
                     <div className='float-start'>
-                        <Button onClick={() => addToCart(product._id, itemCount)} className='text-start'>Add To Cart</Button>
+                        <Button onClick={() => addToCart(product, itemCount)} className='text-start'>Add To Cart</Button>
                     </div>
                 </Col>
 

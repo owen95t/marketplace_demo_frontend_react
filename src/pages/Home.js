@@ -5,7 +5,7 @@ import ProductCarousel from "../components/ProductCarousel";
 import '../css/home.css'
 // import {useState} from "react";
 
-const Home = ({products, cart, addToCart, getCartAmount, removeFromCart}) => {
+const Home = ({products}) => {
     // const sample = [
     //     {
     //         "_id": "618b82d1ce8f8f40f23e4096",
