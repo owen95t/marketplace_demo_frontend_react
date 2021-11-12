@@ -11,6 +11,8 @@ import Register from "./pages/Register";
 import Account from "./pages/Account";
 import {useDispatch} from "react-redux";
 import {addToCart} from "./store/cart/cartSlice";
+import Cart from "./pages/Cart";
+import ShippingAndCart from "./pages/ShippingAndCart";
 
 function App() {
   //const [loaded, setLoaded] = useState(false)
@@ -55,6 +57,8 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />} />
           <Route path='/account' element={<Account/>} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/testCart' element={<ShippingAndCart />} />
         </Routes>
     </div>
   )

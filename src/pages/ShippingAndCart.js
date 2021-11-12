@@ -2,21 +2,20 @@ import {Container, Col, Row, Button} from "react-bootstrap";
 import {useSelector} from "react-redux";
 import {cartOjb, cart_qty, amount} from "../store/cart/cartSlice";
 import '../css/checkout.css'
+import AddressForm from "../components/AddressForm";
 
-const Cart = () => {
-    //SWITCHED TO SHIPPING CART
+const ShippingAndCart = () => {
     const cart = useSelector(cartOjb)
     const cartQty = useSelector(cart_qty)
     const cartAmount = useSelector(amount)
     return (
         <Container>
             <h1 className='text-start mt-4'>Your Cart</h1>
+            <hr/>
             <Row className='w-100' style={{height:"45rem"}}>
                 {/*LEFT FOR PRODUCT LIST*/}
                 <Col sm={8}>
-                    <div className='text-start mt-5'>
-                        {cartQty === 0 ? 'Your Cart Is Empty!' : <></>}
-                    </div>
+                    <AddressForm />
                 </Col>
                 {/*RIGHT FOR TOTAL*/}
                 <Col sm={4}>
@@ -63,4 +62,4 @@ const Cart = () => {
     )
 }
 
-export default Cart
+export default ShippingAndCart

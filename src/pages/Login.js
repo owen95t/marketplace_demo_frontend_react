@@ -47,7 +47,7 @@ const Login = () => {
                 <Button className='mt-4' type="button" onClick={sendLogin}>
                     Login
                 </Button>
-                <div>
+                <div className='mt-2'>
                     <Link to='/register'>Register</Link>
                 </div>
             </Form>

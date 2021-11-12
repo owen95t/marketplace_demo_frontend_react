@@ -1,9 +1,9 @@
 import {Navbar, Container, Nav, Badge} from "react-bootstrap";
 import {useSelector} from "react-redux";
-import {count} from "../store/cart/cartSlice";
+import {cart_qty} from "../store/cart/cartSlice";
 
 const Navigational = ({setShowModal}) => {
-    const cartTotal = useSelector(count)
+    const cartTotal = useSelector(cart_qty)
 
     return (
         <Navbar bg="light" expand="lg">

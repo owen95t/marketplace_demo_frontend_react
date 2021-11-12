@@ -7,7 +7,7 @@ import {createSlice} from "@reduxjs/toolkit";
 *   item_name: '..',
 *   ...
 *   item_price: '..',
-*   qty: '..', THIS IS ADDED WHEN ADD TO CART IS CLICKED
+*   qty: '..', THIS IS ADDED WHEN ADD TO CART IS CLICKED IN APP.JS
 * }
 * */
 
@@ -43,7 +43,8 @@ export const cartSlice = createSlice({
 
 export const {addToCart, removeAllFromCart} = cartSlice.actions
 
-export const count = (state) => state.cart.cartQty
+export const cart_qty = (state) => state.cart.cartQty
 export const amount = (state) => state.cart.cartAmount
+export const cartOjb = (state) => state.cart.cart
 
 export default cartSlice.reducer
