@@ -4,11 +4,14 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import customAxios from "../axios/customAxios";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {userLogin} from "../store/user/userSlice";
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const sendLogin = async () => {
         await customAxios.post('users/login', {email: email, password: password}).then(result => {
@@ -44,7 +47,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button className='mt-4' type="button" onClick={sendLogin}>
+                <Button className='mt-4' type="button" onClick={() => dispatch(userLogin({email: email, password: password}))}>
                     Login
                 </Button>
                 <div className='mt-2'>

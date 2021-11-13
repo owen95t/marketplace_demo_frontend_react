@@ -5,50 +5,69 @@ const initialState = {
     email: '',
     uid: '',
     authenticated: false,
+    address: {},
 }
 
 export const userSlice = createSlice({
-    name:'user',
+    name: 'user',
     initialState,
     reducers: {
-        sendLogin: async (state, action) => {
-            let user = {
-                email: action.payload.email,
-                password: action.payload.password
-            }
-            await customAxios.post('users/login', user).then(result => {
-                if (result.status === 200) {
-                    alert('Login Complete')
-                    //Navigate to account page
-                }
-                state.authenticated = true;
-            }).catch(e => {
-                if (e) {
-                    alert('Login Error! Error Message: ' + e.response.data)
-                    console.log('Login Error! ' + e.response.data)
-                }
-            })
+        setEmail: (state, action) => {
+            state.email = action.payload
         },
-        sendLogout: async (state) => {
-            await customAxios.get('users/logout').then(result => {
-                if (result.status === 200) {
-                    alert('Logged out complete')
-                    //Navigate to home
-                    state.authenticated = false
-                }
-            }).catch(e => {
-                if (e) {
-                    alert('Logout Error. Error Message: ' + e.response.data)
-                    console.log('Log out error. Error Message: ' + e.response.data)
-                }
-            })
+        setUID: (state, action) => {
+            state.uid = action.payload
+        },
+        setAddress: (state, action) => {
+            state.address = action.payload
+        },
+        setAuthed: (state, action) => {
+            state.authenticated = action.payload
         }
     }
 })
-
-export const {sendLogin, sendLogout} = userSlice.actions
+// sendLogin, sendLogout,
+export const {setUID, setAddress, setEmail, setAuthed} = userSlice.actions
 
 export const isAuthenticated = (state) => state.user.authenticated //boolean
 export const userID = (state) => state.user.uid //user id in string
+export const userEmail = (state) => state.user.email
+export const userAddress = (state) => state.user.address
 
 export default userSlice.reducer
+
+export function userLogin(userDetail){
+    const user = {
+        email: userDetail.email,
+        password: userDetail.password,
+    }
+    return async function userLoginThunk(dispatch) {
+        await customAxios.post('users/login', user).then(response => {
+            if (response.status === 200) {
+                dispatch(setEmail(user.email))
+                // console.log('EMAIL: ' + user.email)
+                dispatch(setUID(response.data.id))
+                dispatch(setAuthed(true))
+                alert('Login Success!')
+            }
+        }).catch(e => {
+            if (e) {
+                alert('Error Logging In: ' + e);
+            }
+        })
+    };
+}
+
+export function userLogout() {
+    return async function userLogoutThunk(dispatch) {
+        await customAxios.get('users/logout').then(response => {
+            if (response.status === 200) {
+
+            }
+        }).catch(e => {
+            if (e) {
+                alert('Error Logging out' + e)
+            }
+        })
+    };
+}

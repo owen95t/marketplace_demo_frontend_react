@@ -57,7 +57,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/account' element={<Account/>} />
           <Route path='/cart' element={<ShippingAndCart />} />
-          {/*<Route path='/testCart' element={<ShippingAndCart />} />*/}
+          <Route path='/account/product/:id' element={<ProductPage addToCart={handleAddToCart} /> } />
         </Routes>
     </div>
   )
