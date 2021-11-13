@@ -1,6 +1,6 @@
 import '../css/product.css'
 import {Card} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom"; //TODO: REACT ROUTER
 import {Rating} from "@mui/material";
 
 const Product = ({product}) => {

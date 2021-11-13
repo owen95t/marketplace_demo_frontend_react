@@ -1,6 +1,6 @@
 import './App.css';
 import Navigational from "./components/Navigational";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route} from "react-router-dom"; //TODO: REACT ROUTER
 import Home from "./pages/Home";
 import {useEffect, useState} from "react";
 import ProductPage from "./pages/ProductPage";
@@ -15,7 +15,7 @@ import ShippingAndCart from "./pages/ShippingAndCart";
 import {GuardedRoute, GuardProvider} from 'react-router-guards'
 import {isAuthenticated} from "./store/user/userSlice";
 import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 
 function App() {
   //const [loaded, setLoaded] = useState(false)

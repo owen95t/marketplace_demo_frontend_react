@@ -1,5 +1,5 @@
 import {Button, Container, Modal} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom' //TODO: REACT ROUTER
 import {cartOjb, cart_qty, amount, clearCart} from "../store/cart/cartSlice";
 import {useSelector, useDispatch} from "react-redux";
 import ProductInCart from "./ProductInCart";

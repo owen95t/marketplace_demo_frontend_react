@@ -2,7 +2,7 @@ import {Button, Col, Form, Image, Modal, Row} from "react-bootstrap";
 import banana from "../banana.jpeg";
 import {useState} from "react";
 import customAxios from "../axios/customAxios";
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 
 //TODO: Implement show/hide
 const EditModal = ({product, show, setShowModal, getInfo}) => {

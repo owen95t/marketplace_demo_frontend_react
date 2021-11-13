@@ -1,5 +1,5 @@
 import {Col, Form, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom"; //TODO: REACT ROUTER
 import {useSelector} from "react-redux";
 import {isAuthenticated, userEmail} from "../store/user/userSlice";
 import {useEffect} from "react";

@@ -1,5 +1,5 @@
 import {Button, Col, Container, FormControl, Image, InputGroup} from "react-bootstrap";
-import {useParams} from "react-router-dom";
+import {useParams} from "react-router-dom"; //TODO: React Router
 import {useEffect, useState} from "react";
 import customAxios from "../axios/customAxios";
 import {Rating} from "@mui/material";
@@ -7,7 +7,6 @@ import banana from '../banana.jpeg'
 import {useSelector} from "react-redux";
 import {userID} from "../store/user/userSlice";
 import EditModal from "../components/EditModal";
-import {Outlet} from "react-router-dom";
 
 //TODO: Implement rating
 const ProductPage = ({addToCart}) => {
@@ -102,7 +101,6 @@ const ProductPage = ({addToCart}) => {
 
             </Container>
             {product ? <EditModal product={product} show={showModal} setShowModal={handleModal} getInfo={getInfo}/> : <></> }
-            <Outlet/>
         </>
     )
 }

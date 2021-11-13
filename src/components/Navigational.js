@@ -4,7 +4,7 @@ import {cart_qty} from "../store/cart/cartSlice";
 import {Link} from 'react-router-dom'
 import {isAuthenticated} from "../store/user/userSlice";
 import {userLogout} from '../store/user/userSlice'
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 import {useEffect} from "react";
 
 const Navigational = ({setShowModal}) => {

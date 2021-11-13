@@ -3,7 +3,7 @@ import '../css/form.css'
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import customAxios from "../axios/customAxios";
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 
 const Register = () => {
     const [email, setEmail] = useState('')

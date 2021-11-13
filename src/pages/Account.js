@@ -3,7 +3,7 @@ import {Button, Col, Image, Row} from "react-bootstrap";
 // import {cart_qty} from "../store/cart/cartSlice";
 import {useSelector} from "react-redux";
 import {userEmail, isAuthenticated, userAddress} from "../store/user/userSlice";
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 import {useEffect, useState} from "react";
 import '../css/account.css'
 import customAxios from "../axios/customAxios";
