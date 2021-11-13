@@ -11,6 +11,7 @@ import {createSlice} from "@reduxjs/toolkit";
 * }
 * */
 //TODO: Implement localstorage saving so cart items persist.
+//TODO: Implement remove from CART
 const initialState = {
     cart: {}, //assume cart object is {'id1': {product_obj}, 'id2': {product_obj} id (key) paired to product_obj (value)
     cartQty: 0, //cart total quantity

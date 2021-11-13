@@ -1,8 +1,15 @@
 import {Col, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {isAuthenticated, userEmail} from "../store/user/userSlice";
+import {useEffect} from "react";
 
 const AddressForm = () => {
+    const auth = useSelector(isAuthenticated);
+    const email = useSelector(userEmail)
+    useEffect(() => {
 
+    }, [])
     return (
         <Form>
             <Row>
@@ -10,12 +17,12 @@ const AddressForm = () => {
                     <h4 className='text-start'>Contact Information</h4>
                 </Col>
                 <Col>
-                    <p className='text-end'>Already have an account? <Link to='/login'>Log in</Link></p>
+                    {auth ? <></> : <p className='text-end'>Already have an account? <Link to='/login'>Log in</Link></p> }
                 </Col>
             </Row>
             <Row className='mt-2 mb-4'>
                 <Form.Group>
-                    <Form.Control placeholder='Email'/>
+                    {email ? <Form.Control placeholder='Email' value={email}/>: <Form.Control placeholder='Email'/>}
                 </Form.Group>
             </Row>
             <hr/>

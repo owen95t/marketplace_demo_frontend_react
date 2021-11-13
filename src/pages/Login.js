@@ -1,30 +1,25 @@
 import {Button, Form} from "react-bootstrap";
 import '../css/form.css'
 import {Link} from "react-router-dom";
-import {useState} from "react";
-import customAxios from "../axios/customAxios";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {userLogin} from "../store/user/userSlice";
+import {isAuthenticated} from "../store/user/userSlice";
+
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const authed = useSelector(isAuthenticated)
 
-    const sendLogin = async () => {
-        await customAxios.post('users/login', {email: email, password: password}).then(result => {
-            if (result.status === 200) {
-                alert('Login Success!')
-                navigate('../account')
-            }
-        }).catch(e => {
-            if (e) {
-                alert('Login failed. PLease try again. ' + e)
-            }
-        })
-    }
+    useEffect(() => {
+        if (authed) {
+            navigate('/account')
+        }
+    },[authed])
 
     return (
         <div className='Login'>

@@ -45,7 +45,6 @@ export function userLogin(userDetail){
         await customAxios.post('users/login', user).then(response => {
             if (response.status === 200) {
                 dispatch(setEmail(user.email))
-                // console.log('EMAIL: ' + user.email)
                 dispatch(setUID(response.data.id))
                 dispatch(setAuthed(true))
                 alert('Login Success!')
@@ -62,11 +61,29 @@ export function userLogout() {
     return async function userLogoutThunk(dispatch) {
         await customAxios.get('users/logout').then(response => {
             if (response.status === 200) {
-
+                dispatch(setAuthed(false))
+                dispatch(setUID(''))
+                dispatch(setEmail(''))
+                dispatch(setAddress(''))
+                alert('Logged out complete!')
             }
         }).catch(e => {
             if (e) {
                 alert('Error Logging out' + e)
+            }
+        })
+    };
+}
+
+export function userRegister(userData) {
+    return async function userRegisterThunk(dispatch) {
+        await customAxios.post('users/register', {email: userData.email, password: userData.password }).then(response => {
+            if (response.status === 200) {
+                alert('Registration Complete! Please log in.')
+            }
+        }).catch(e => {
+            if (e) {
+                alert('Error registering: ' + e)
             }
         })
     };

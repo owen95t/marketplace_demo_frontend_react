@@ -4,12 +4,23 @@ import {useEffect, useState} from "react";
 import customAxios from "../axios/customAxios";
 import {Rating} from "@mui/material";
 import banana from '../banana.jpeg'
-
+import {useSelector} from "react-redux";
+import {userID} from "../store/user/userSlice";
+import EditModal from "../components/EditModal";
 
 const ProductPage = ({addToCart}) => {
     const params = useParams()
     const [product, setProduct] = useState()
     const [itemCount, setItemCount] = useState(1)
+    const uid = useSelector(userID)
+
+    //for editModal
+    const [showModal, setShowModal] = useState(false)
+
+    const handleModal = (boo) => {
+        setShowModal(boo)
+    }
+
     const getInfo = async () => {
         console.log(params.id)
         await customAxios.get(`items/getID/${params.id}`).then(response => {
@@ -41,6 +52,7 @@ const ProductPage = ({addToCart}) => {
 
     useEffect(() => {
         getInfo()
+        console.log(product)
     }, [])
 
     return (
@@ -73,9 +85,13 @@ const ProductPage = ({addToCart}) => {
                     <div className='float-start'>
                         <Button onClick={() => addToCart(product, itemCount)} className='text-start'>Add To Cart</Button>
                     </div>
+                    <div>
+                        {product ? (product.user_id === uid ? <Button className='float-start' style={{marginLeft: '1rem'}} onClick={() => handleModal(true)}>Edit</Button> : <></>) : <></>}
+                    </div>
                 </Col>
 
             </Container>
+            {product ? <EditModal product={product} show={showModal} setShowModal={handleModal} getInfo={getInfo}/> : <></> }
         </>
     )
 }

@@ -1,5 +1,5 @@
 import {Container} from "@mui/material";
-import {Col, Image, Row} from "react-bootstrap";
+import {Button, Col, Image, Row} from "react-bootstrap";
 // import {cart_qty} from "../store/cart/cartSlice";
 import {useSelector} from "react-redux";
 import {userEmail, isAuthenticated, userAddress} from "../store/user/userSlice";
@@ -9,6 +9,7 @@ import '../css/account.css'
 import customAxios from "../axios/customAxios";
 import Product from "../components/Product";
 import blankProfileImage from '../blank_profile.png'
+import NewItemModal from "../components/NewItemModal";
 
 
 const Account = () => {
@@ -18,6 +19,12 @@ const Account = () => {
     const email = useSelector(userEmail)
     const address = useSelector(userAddress)
 
+    const [showModal, setShowModal] = useState(false)
+
+    const handleModal = (boo) => {
+        setShowModal(boo)
+    }
+
     const getUserItems = async () => {
         if (authed) {
             //user id is extracted from req.session on server side
@@ -26,8 +33,8 @@ const Account = () => {
                     setUserItems([...response.data])
                 }
             }).catch(e => {
-                console.log('')
-                alert('Error retrieving your items!')
+                console.log('Error retrieving your items' + e)
+                alert('Error retrieving your items!' + e)
             })
         }else{ //if not logged in
             //alert('You are not authenticated!') //alert
@@ -37,7 +44,10 @@ const Account = () => {
 
     useEffect(() => {
         getUserItems()
-    }, [])
+        if (!authed) {
+            navigate('/login')
+        }
+    }, [authed])
 
     return (
         <Container className='mt-5'>
@@ -54,7 +64,15 @@ const Account = () => {
                 {/*</Row>*/}
                 <Col sm={8}>
                 {/*     FOR USER ITEMS ON SALE*/}
-                    <h3 className='text-start'>Your Items</h3>
+                    <Row>
+                        <Col>
+                            <h3 className='text-start'>Your Items</h3>
+                        </Col>
+                        <Col>
+                            <Button className='float-end' variant='success' type='button' onClick={() => handleModal(true)}>Create New Item</Button>
+                        </Col>
+                    </Row>
+                    <hr/>
                     {/*Display products*/}
                     <div style={{display: 'flex', flexWrap: "wrap"}}>
                         {userItems.map((e, i) => (
@@ -77,6 +95,7 @@ const Account = () => {
                     </div>
                 </Col>
             </Row>
+            <NewItemModal showModal={showModal} setShowModal={handleModal} getUserItem={getUserItems}/>
         </Container>
     )
 }

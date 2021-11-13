@@ -1,10 +1,24 @@
 import {Navbar, Container, Nav, Badge} from "react-bootstrap";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {cart_qty} from "../store/cart/cartSlice";
 import {Link} from 'react-router-dom'
+import {isAuthenticated} from "../store/user/userSlice";
+import {userLogout} from '../store/user/userSlice'
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 const Navigational = ({setShowModal}) => {
     const cartTotal = useSelector(cart_qty)
+    const auth = useSelector(isAuthenticated)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        console.log('AUTH STATUS'  + auth)
+        if(!auth){
+            navigate('/')
+        }
+    }, [auth])
 
     return (
         <Navbar bg="light" expand="lg">
@@ -20,7 +34,8 @@ const Navigational = ({setShowModal}) => {
                             <Nav.Link eventKey="link-1" onClick={() => setShowModal(true)}>Cart  <Badge>{cartTotal}</Badge></Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                            {auth ? <button className='btn btn-link' onClick={() => dispatch(userLogout())}>Logout</button> : <Nav.Link as={Link} to='/login'>Login</Nav.Link>}
+                            {/*<Nav.Link as={Link} to='/login'>Login</Nav.Link>*/}
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link as={Link} to='/account'>Account</Nav.Link>
