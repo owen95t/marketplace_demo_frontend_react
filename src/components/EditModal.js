@@ -46,6 +46,26 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
         })
     }
 
+    const editItem = async () => {
+        let id = product._id
+        let edited = {
+            item_name: itemName,
+            item_desc: itemDesc,
+            item_price: itemPrice,
+            item_discount: itemDiscount
+        }
+        await customAxios.put('items/edit', {item_id: id, editedData: edited}).then(response => {
+            if (response.status === 200) {
+                alert('Item Edited Successfully!')
+
+            }
+        }).catch(e => {
+            if (e) {
+                alert('Item edit failed: ' + e)
+            }
+        })
+    }
+
 
     return (
         <Modal show={show} onHide={() => setShowModal(false)}>
@@ -91,7 +111,7 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
             <Modal.Footer>
                 <Button variant='secondary' type='button' onClick={() => setShowModal(false)}>Cancel</Button>
                 <Button variant='danger' type='button' onClick={() => deleteItem()}>Delete</Button>
-                <Button variant='success' type='button'>
+                <Button variant='success' type='button' onClick={() => editItem()}>
                     Edit Item
                 </Button>
             </Modal.Footer>
