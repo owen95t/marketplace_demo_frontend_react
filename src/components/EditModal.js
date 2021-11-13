@@ -2,7 +2,7 @@ import {Button, Col, Form, Image, Modal, Row} from "react-bootstrap";
 import banana from "../banana.jpeg";
 import {useState} from "react";
 import customAxios from "../axios/customAxios";
-import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
+import {useHistory} from "react-router-dom";
 
 //TODO: Implement show/hide
 const EditModal = ({product, show, setShowModal, getInfo}) => {
@@ -11,7 +11,7 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
     const [itemPrice, setItemPrice] = useState(product.item_price)
     const [itemDiscount, setItemDiscount] = useState(product.item_discount)
     const visibility = product.item_status
-    const navigate = useNavigate()
+    const history = useHistory()
 
     const handleItemName = (name) => {
         setItemName(name)
@@ -37,7 +37,7 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
                 alert('Item deleted successfully!')
                 setShowModal(false)
                 getInfo() //calls getInfo in ProductPage to refresh
-                navigate('/account')
+                history.push('/account')
             }
         }).catch(e => {
             if (e) {

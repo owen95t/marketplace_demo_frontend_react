@@ -3,18 +3,18 @@ import {Button, Col, Image, Row} from "react-bootstrap";
 // import {cart_qty} from "../store/cart/cartSlice";
 import {useSelector} from "react-redux";
 import {userEmail, isAuthenticated, userAddress} from "../store/user/userSlice";
-import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 import {useEffect, useState} from "react";
 import '../css/account.css'
 import customAxios from "../axios/customAxios";
 import Product from "../components/Product";
 import blankProfileImage from '../blank_profile.png'
 import NewItemModal from "../components/NewItemModal";
+import {useHistory} from "react-router-dom";
 
 
 const Account = () => {
     const authed = useSelector(isAuthenticated)
-    const navigate = useNavigate()
+    const history = useHistory()
     const [userItems, setUserItems] = useState([])
     const email = useSelector(userEmail)
     const address = useSelector(userAddress)
@@ -36,17 +36,16 @@ const Account = () => {
                 console.log('Error retrieving your items' + e)
                 alert('Error retrieving your items!' + e)
             })
-        }else{ //if not logged in
-            //alert('You are not authenticated!') //alert
-            //navigate('/login')  //navigate to login page
         }
+        // else{ //if not logged in
+        //     //alert('You are not authenticated!') //alert
+        //     //history.push(
+        //     //navigate('/login')  //navigate to login page
+        // }
     }
 
     useEffect(() => {
         getUserItems()
-        if (!authed) {
-            navigate('/login')
-        }
     }, [authed])
 
     return (

@@ -3,18 +3,18 @@ import '../css/form.css'
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import customAxios from "../axios/customAxios";
-import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
+import {useHistory} from "react-router-dom";
 
 const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate()
+    const history = useHistory()
 
     const sendRegister = async () => {
         await customAxios.post('users/register', {email: email, password: password}).then((result => {
             if (result.status === 200) {
                 alert('Registration Successful!')
-                navigate('/login')
+                history.push('/login')
             }
         })).catch(e => {
             if (e) {

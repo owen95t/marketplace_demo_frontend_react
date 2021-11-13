@@ -1,6 +1,6 @@
 import './App.css';
 import Navigational from "./components/Navigational";
-import {Routes, Route} from "react-router-dom"; //TODO: REACT ROUTER
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from "./pages/Home";
 import {useEffect, useState} from "react";
 import ProductPage from "./pages/ProductPage";
@@ -15,7 +15,6 @@ import ShippingAndCart from "./pages/ShippingAndCart";
 import {GuardedRoute, GuardProvider} from 'react-router-guards'
 import {isAuthenticated} from "./store/user/userSlice";
 import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 
 function App() {
   //const [loaded, setLoaded] = useState(false)
@@ -23,7 +22,6 @@ function App() {
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
   const auth = useSelector(isAuthenticated)
-  const navigate = useNavigate()
 
   const getProducts = async () => {
     await customAxios.get('items/getAll').then((response) => {
@@ -53,11 +51,14 @@ function App() {
   }
 
   const requireLogin = (to, from, next) => {
+    console.log('Route guard called')
     if (to.meta.auth) {
-      if (auth) {
-        navigate('/login')
+      if (!auth) {
+        console.log('Redirecting')
+        next.redirect('/login')
+      } else if (auth) {
+        next.redirect('/account')
       }
-
     }else {
       next();
     }
@@ -65,26 +66,61 @@ function App() {
 
   return (
     <div className="App">
-      <Navigational setShowModal={handleModal}/>
-      <CartModal showModal={showModal} setShowModal={handleModal}/>
-      <GuardProvider>
-        <Routes>
-          <Route path='/' element={<Home products={products} getProduct={getProducts}/>}/>
-          <Route path='product/:id' element={<ProductPage addToCart={handleAddToCart}/>}/>
-          <Route path='login' element={<Login />}/>
-          <Route path='register' element={<Register />} />
-          <GuardedRoute path='account' element={<Account />} meta={{auth: true}}/>
-          <Route path='cart' element={<ShippingAndCart />} />
-          <Route path='account/product/:id' element={<ProductPage addToCart={handleAddToCart} /> } />
-          <Route path="*"
-                 element={
-                   <main style={{ padding: "1rem" }}>
-                     <p>There's nothing here!</p>
-                   </main>
-                 }
-          />
-        </Routes>
-      </GuardProvider>
+        <Navigational setShowModal={handleModal}/>
+        <CartModal showModal={showModal} setShowModal={handleModal}/>
+        <GuardProvider guards={[requireLogin]}>
+          <Switch>
+            <Route
+                exact path='/'
+                render={(props) => (
+                    <Home
+                        {...props}
+                        products={products}
+                        getProduct={getProducts}
+                    />)}
+            />
+            <Route
+                exact path='/product/:id'
+                exact render={(props) => (
+                    <ProductPage
+                        {...props}
+                        addToCart={handleAddToCart}
+                    />)}
+            />
+            <Route
+                exact path='/login'
+                render={() => <Login />}/>
+            <Route
+                exact path='/register'
+                render={() => <Register />} />
+            <GuardedRoute
+                path='/account'
+                meta={{auth: true}}
+                exact component={(props) =>
+                    <Account
+                        {...props}
+                    />}
+            />
+            <Route
+                exact path='/cart'
+                render={() => <ShippingAndCart />} />
+            <Route
+                exact path='/account/product/:id'
+                render={(props) => (
+                    <ProductPage
+                        {...props}
+                        addToCart={handleAddToCart} />
+                )}
+            />
+            <Route path="*"
+                   render={ () =>
+                     <main style={{ padding: "1rem" }}>
+                       <p>There's nothing here!</p>
+                     </main>
+                   }
+            />
+          </Switch>
+        </GuardProvider>
     </div>
   )
 }

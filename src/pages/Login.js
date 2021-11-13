@@ -2,22 +2,21 @@ import {Button, Form} from "react-bootstrap";
 import '../css/form.css'
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {userLogin} from "../store/user/userSlice";
 import {isAuthenticated} from "../store/user/userSlice";
-
+import {useHistory} from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate();
+    const history = useHistory()
     const dispatch = useDispatch()
     const authed = useSelector(isAuthenticated)
 
     useEffect(() => {
         if (authed) {
-            navigate('/account')
+            history.push('/account')
         }
     },[authed])
 

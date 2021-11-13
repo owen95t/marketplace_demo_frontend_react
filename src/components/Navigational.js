@@ -4,19 +4,20 @@ import {cart_qty} from "../store/cart/cartSlice";
 import {Link} from 'react-router-dom'
 import {isAuthenticated} from "../store/user/userSlice";
 import {userLogout} from '../store/user/userSlice'
-import {useNavigate} from "react-router-dom"; //TODO: REACT ROUTER
 import {useEffect} from "react";
+import {useHistory} from "react-router-dom";
 
 const Navigational = ({setShowModal}) => {
     const cartTotal = useSelector(cart_qty)
     const auth = useSelector(isAuthenticated)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const history = useHistory()
 
     useEffect(() => {
         console.log('AUTH STATUS'  + auth)
-        if(!auth){
-            navigate('/')
+        console.log(auth)
+        if (!auth) {
+            history.push('/')
         }
     }, [auth])
 
