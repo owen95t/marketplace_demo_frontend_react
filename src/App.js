@@ -12,12 +12,18 @@ import Account from "./pages/Account";
 import {useDispatch} from "react-redux";
 import {addToCart} from "./store/cart/cartSlice";
 import ShippingAndCart from "./pages/ShippingAndCart";
+import {GuardedRoute, GuardProvider} from 'react-router-guards'
+import {isAuthenticated} from "./store/user/userSlice";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 function App() {
   //const [loaded, setLoaded] = useState(false)
   const [products, setProducts] = useState([])
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
+  const auth = useSelector(isAuthenticated)
+  const navigate = useNavigate()
 
   const getProducts = async () => {
     await customAxios.get('items/getAll').then((response) => {
@@ -46,19 +52,39 @@ function App() {
     dispatch(addToCart(newProduct))
   }
 
+  const requireLogin = (to, from, next) => {
+    if (to.meta.auth) {
+      if (auth) {
+        navigate('/login')
+      }
+
+    }else {
+      next();
+    }
+  }
+
   return (
     <div className="App">
       <Navigational setShowModal={handleModal}/>
       <CartModal showModal={showModal} setShowModal={handleModal}/>
+      <GuardProvider>
         <Routes>
-          <Route path='/' element={<Home products={products} />}/>
-          <Route path='/product/:id' element={<ProductPage addToCart={handleAddToCart}/>}/>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/register' element={<Register />} />
-          <Route path='/account' element={<Account/>} />
-          <Route path='/cart' element={<ShippingAndCart />} />
-          <Route path='/account/product/:id' element={<ProductPage addToCart={handleAddToCart} /> } />
+          <Route path='/' element={<Home products={products} getProduct={getProducts}/>}/>
+          <Route path='product/:id' element={<ProductPage addToCart={handleAddToCart}/>}/>
+          <Route path='login' element={<Login />}/>
+          <Route path='register' element={<Register />} />
+          <GuardedRoute path='account' element={<Account />} meta={{auth: true}}/>
+          <Route path='cart' element={<ShippingAndCart />} />
+          <Route path='account/product/:id' element={<ProductPage addToCart={handleAddToCart} /> } />
+          <Route path="*"
+                 element={
+                   <main style={{ padding: "1rem" }}>
+                     <p>There's nothing here!</p>
+                   </main>
+                 }
+          />
         </Routes>
+      </GuardProvider>
     </div>
   )
 }

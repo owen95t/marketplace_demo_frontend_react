@@ -1,5 +1,8 @@
 import {Col, Image, Row} from "react-bootstrap";
 import banana from "../banana.jpeg";
+import {removeItemFromCart} from "../store/cart/cartSlice";
+import {useDispatch} from "react-redux";
+import {ImCross} from "react-icons/all";
 
 /*
 * ASSUME PRODUCT OBJ:
@@ -13,6 +16,8 @@ import banana from "../banana.jpeg";
 
 
 const ProductInCart = ({product}) => {
+    const dispatch = useDispatch()
+
     const calculateDiscount = (original, percent) => {
         let newPrice = original * (1-(percent/100))
         return (
@@ -33,6 +38,7 @@ const ProductInCart = ({product}) => {
                 {/*    Item name ALIGHT LEFT*/}
                     <strong className='text-start'>{product ? product.item_name : 'test'}</strong>
                     <p className='text-start'>Qty: {product.qty}</p>
+                    <ImCross className='float-start' onClick={() => dispatch(removeItemFromCart(product))}/>
                 </Col>
                 <Col>
                 {/*    Item Price Align RIGHT*/}

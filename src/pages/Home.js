@@ -3,12 +3,15 @@ import {Col, Container, Row} from "react-bootstrap";
 import Product from "../components/Product";
 import ProductCarousel from "../components/ProductCarousel";
 import '../css/home.css'
+import {useEffect} from "react";
 // import {useState} from "react";
 
-const Home = ({products}) => {
+const Home = ({products, getProduct}) => {
+    useEffect(() => {
+        getProduct()
+    }, [])
     return (
         <Container>
-
             <Row className='' style={{borderBottom: '2px solid black'}}>
                 <Col>
                     <h1 className='mt-5 text-start'>Our Best Sellers</h1>

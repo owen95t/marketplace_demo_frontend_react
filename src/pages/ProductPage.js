@@ -7,6 +7,7 @@ import banana from '../banana.jpeg'
 import {useSelector} from "react-redux";
 import {userID} from "../store/user/userSlice";
 import EditModal from "../components/EditModal";
+import {Outlet} from "react-router-dom";
 
 //TODO: Implement rating
 const ProductPage = ({addToCart}) => {
@@ -14,15 +15,18 @@ const ProductPage = ({addToCart}) => {
     const [product, setProduct] = useState()
     const [itemCount, setItemCount] = useState(1)
     const uid = useSelector(userID)
-
+    const [itemRating, setItemRating] = useState()
     //for editModal
     const [showModal, setShowModal] = useState(false)
+
+    // const [searchParams, setSearchParams] = useSearchParams()
 
     const handleModal = (boo) => {
         setShowModal(boo)
     }
 
     const getInfo = async () => {
+        console.log('GetInfo called')
         console.log(params.id)
         await customAxios.get(`items/getID/${params.id}`).then(response => {
             setProduct(response.data)
@@ -51,9 +55,17 @@ const ProductPage = ({addToCart}) => {
         )
     }
 
+    const handleRating = () => {
+
+    }
+
     useEffect(() => {
         getInfo()
         console.log(product)
+        if (product) {
+            setItemRating(product.item_rating)
+        }
+        console.log(itemRating)
     }, [])
 
     return (
@@ -66,14 +78,11 @@ const ProductPage = ({addToCart}) => {
                     <h1 className='text-start'>{product ? product.item_name : ""}</h1>
                     <h5 className='text-start'>Description</h5>
                     <p className='text-start'>{product ? product.item_desc : ""}</p>
-
+                    {product ? (!product.item_status ? <p className='text-start'>This product is currently hidden.</p> : <></>) : <></>}
                     <p className='text-start'>฿ {product ? (product.item_discount > 0 ? calculateDiscount(product.item_price, product.item_discount) : product.item_price) : ""}</p>
                     {/*If product is yours, you cannot rate*/}
-                    {product ? (product.user_id === uid ? <Rating className='float-start mb-3' value={product.item_rating} disabled/> : <Rating className='float-start mb-3' value={0} /> ) : <></>}
-                    {/*{product ? <Rating*/}
-                    {/*    value={product.item_rating}*/}
-                    {/*    className='float-start mb-3'*/}
-                    {/*/> : <Rating value={0}/>}*/}
+                    {product ? (product.user_id === uid ? <Rating className='float-start mb-3' value={itemRating} disabled/> : <Rating className='float-start mb-3' value={itemRating} /> ) : <></>}
+
                     <div style={{width: '110px'}}>
                         <InputGroup className='mb-3'>
                             <Button variant='outline-secondary' onClick={() => handleItemCount(-1)}>-</Button>
@@ -93,6 +102,7 @@ const ProductPage = ({addToCart}) => {
 
             </Container>
             {product ? <EditModal product={product} show={showModal} setShowModal={handleModal} getInfo={getInfo}/> : <></> }
+            <Outlet/>
         </>
     )
 }

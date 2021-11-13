@@ -41,11 +41,23 @@ export const cartSlice = createSlice({
         },
         clearCart: (state) => {
             state.cart = {}
+            state.cartQty = 0
+            state.cartAmount = 0
+        },
+        removeItemFromCart: (state, action) => {
+            if (state.cart[action.payload._id]) {
+                let totalQuantity = state.cart[action.payload._id].qty //get total quantity of item in cart
+                let totalAmount = (state.cart[action.payload._id].item_price) * totalQuantity //get total amount of item (same item) in cart
+                state.cartQty -= totalQuantity //subtract quantity from cartqty total
+                state.cartAmount -= totalAmount //subtract item amount total from cartamount total
+                delete state.cart[action.payload._id]
+
+            }
         }
     }
 })
 
-export const {addToCart, removeAllFromCart, clearCart} = cartSlice.actions
+export const {addToCart, removeAllFromCart, clearCart, removeItemFromCart} = cartSlice.actions
 
 export const cart_qty = (state) => state.cart.cartQty
 export const amount = (state) => state.cart.cartAmount

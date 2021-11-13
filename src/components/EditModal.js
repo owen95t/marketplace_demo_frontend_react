@@ -4,11 +4,13 @@ import {useState} from "react";
 import customAxios from "../axios/customAxios";
 import {useNavigate} from "react-router-dom";
 
+//TODO: Implement show/hide
 const EditModal = ({product, show, setShowModal, getInfo}) => {
     const [itemName, setItemName] = useState(product.item_name)
     const [itemDesc, setItemDesc] = useState(product.item_desc)
     const [itemPrice, setItemPrice] = useState(product.item_price)
     const [itemDiscount, setItemDiscount] = useState(product.item_discount)
+    const visibility = product.item_status
     const navigate = useNavigate()
 
     const handleItemName = (name) => {
@@ -34,7 +36,7 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
             if (response.status === 200) {
                 alert('Item deleted successfully!')
                 setShowModal(false)
-                getInfo()
+                getInfo() //calls getInfo in ProductPage to refresh
                 navigate('/account')
             }
         }).catch(e => {
@@ -55,11 +57,32 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
         await customAxios.put('items/edit', {item_id: id, editedData: edited}).then(response => {
             if (response.status === 200) {
                 alert('Item Edited Successfully!')
-
+                getInfo()
             }
         }).catch(e => {
             if (e) {
                 alert('Item edit failed: ' + e)
+            }
+        })
+    }
+
+    const handleVisibility = async (boo) => { //takes in boolean
+        let id = product._id
+        let edited = {
+            item_status: boo
+        }
+        await customAxios.put('items/edit', {item_id: id, editedData: edited}).then(response => {
+            if (response.status === 200) {
+                if (boo) {
+                    alert('Item is now showing!')
+                }else {
+                    alert('Item is now hidden!')
+                }
+                getInfo()
+            }
+        }).catch(e => {
+            if (e) {
+                alert('Error changing the visibility of this item: ' + e)
             }
         })
     }
@@ -105,6 +128,7 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
                         </Form.Group>
                     </Row>
                 </Form>
+                <h3>Your product is currently {visibility ? 'visible' : 'hidden'}.</h3>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='secondary' type='button' onClick={() => setShowModal(false)}>Cancel</Button>
@@ -112,6 +136,7 @@ const EditModal = ({product, show, setShowModal, getInfo}) => {
                 <Button variant='success' type='button' onClick={() => editItem()}>
                     Edit Item
                 </Button>
+                {visibility ? <Button onClick={() => handleVisibility(false)}>Hide</Button> : <Button onClick={() => handleVisibility(true)}>Show</Button>}
             </Modal.Footer>
         </Modal>
     );
