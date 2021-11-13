@@ -1,6 +1,6 @@
 import {Container, Col, Row, Button} from "react-bootstrap";
-import {useSelector, useDispatch} from "react-redux";
-import {cartOjb, cart_qty, amount, clearCart} from "../store/cart/cartSlice";
+import {useSelector} from "react-redux";
+import {cartOjb, cart_qty, amount} from "../store/cart/cartSlice";
 import '../css/checkout.css'
 import AddressForm from "../components/AddressForm";
 import ProductInCart from "../components/ProductInCart";

@@ -10,7 +10,7 @@ import {createSlice} from "@reduxjs/toolkit";
 *   qty: '..', THIS IS ADDED WHEN ADD TO CART IS CLICKED IN APP.JS
 * }
 * */
-
+//TODO: Implement localstorage saving so cart items persist.
 const initialState = {
     cart: {}, //assume cart object is {'id1': {product_obj}, 'id2': {product_obj} id (key) paired to product_obj (value)
     cartQty: 0, //cart total quantity

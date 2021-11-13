@@ -14,14 +14,6 @@ const Navigational = ({setShowModal}) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                        {/*<Nav.Link href="">Link</Nav.Link>*/}
-                        {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">*/}
-                        {/*    <NavDropdown.Item href="">Action</NavDropdown.Item>*/}
-                        {/*    <NavDropdown.Item href="">Another action</NavDropdown.Item>*/}
-                        {/*    <NavDropdown.Item href="">Something</NavDropdown.Item>*/}
-                        {/*    <NavDropdown.Divider />*/}
-                        {/*    <NavDropdown.Item href="">Separated link</NavDropdown.Item>*/}
-                        {/*</NavDropdown>*/}
                     </Nav>
                     <Nav className='justify-content-end'>
                         <Nav.Item>
