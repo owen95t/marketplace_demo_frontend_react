@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {userID} from "../store/user/userSlice";
 import EditModal from "../components/EditModal";
 
+//TODO: Implement rating
 const ProductPage = ({addToCart}) => {
     const params = useParams()
     const [product, setProduct] = useState()
@@ -67,12 +68,12 @@ const ProductPage = ({addToCart}) => {
                     <p className='text-start'>{product ? product.item_desc : ""}</p>
 
                     <p className='text-start'>฿ {product ? (product.item_discount > 0 ? calculateDiscount(product.item_price, product.item_discount) : product.item_price) : ""}</p>
-
-                    {product ? <Rating
-                        value={product.item_rating}
-                        className='float-start mb-3'
-                    /> :
-                    <Rating value={0}/>}
+                    {/*If product is yours, you cannot rate*/}
+                    {product ? (product.user_id === uid ? <Rating className='float-start mb-3' value={product.item_rating} disabled/> : <Rating className='float-start mb-3' value={0} /> ) : <></>}
+                    {/*{product ? <Rating*/}
+                    {/*    value={product.item_rating}*/}
+                    {/*    className='float-start mb-3'*/}
+                    {/*/> : <Rating value={0}/>}*/}
                     <div style={{width: '110px'}}>
                         <InputGroup className='mb-3'>
                             <Button variant='outline-secondary' onClick={() => handleItemCount(-1)}>-</Button>

@@ -4,8 +4,6 @@ import {useState} from "react";
 import customAxios from "../axios/customAxios";
 import {useNavigate} from "react-router-dom";
 
-
-//TODO: send EDIT
 const EditModal = ({product, show, setShowModal, getInfo}) => {
     const [itemName, setItemName] = useState(product.item_name)
     const [itemDesc, setItemDesc] = useState(product.item_desc)
