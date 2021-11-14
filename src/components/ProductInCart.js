@@ -2,7 +2,7 @@ import {Col, Image, Row} from "react-bootstrap";
 import banana from "../banana.jpeg";
 import {removeItemFromCart} from "../store/cart/cartSlice";
 import {useDispatch} from "react-redux";
-import {ImCross} from "react-icons/all";
+import {BsTrash} from "react-icons/all";
 
 /*
 * ASSUME PRODUCT OBJ:
@@ -38,7 +38,7 @@ const ProductInCart = ({product}) => {
                 {/*    Item name ALIGHT LEFT*/}
                     <strong className='text-start'>{product ? product.item_name : 'test'}</strong>
                     <p className='text-start'>Qty: {product.qty}</p>
-                    <ImCross className='float-start' onClick={() => dispatch(removeItemFromCart(product))}/>
+                    <BsTrash className='float-start' onClick={() => dispatch(removeItemFromCart(product))}/>
                 </Col>
                 <Col>
                 {/*    Item Price Align RIGHT*/}

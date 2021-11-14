@@ -16,9 +16,6 @@ const Home = ({products, getProduct}) => {
                 <Col>
                     <h1 className='mt-5 text-start'>Our Best Sellers</h1>
                 </Col>
-                {/*<Col>*/}
-                {/*    <Button className='mt-5 float-end'>View All</Button>*/}
-                {/*</Col>*/}
             </Row>
             <ProductCarousel products={products}/>
             <Row className='' style={{borderBottom: '2px solid black'}}>
