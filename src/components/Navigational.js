@@ -5,20 +5,15 @@ import {Link} from 'react-router-dom'
 import {isAuthenticated} from "../store/user/userSlice";
 import {userLogout} from '../store/user/userSlice'
 import {useEffect} from "react";
-import {useHistory} from "react-router-dom";
 
 const Navigational = ({setShowModal}) => {
     const cartTotal = useSelector(cart_qty)
     const auth = useSelector(isAuthenticated)
     const dispatch = useDispatch()
-    const history = useHistory()
 
     useEffect(() => {
         console.log('AUTH STATUS'  + auth)
         console.log(auth)
-        if (!auth) {
-            history.push('/')
-        }
     }, [auth])
 
     return (

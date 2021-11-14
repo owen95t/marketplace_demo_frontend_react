@@ -4,7 +4,6 @@ import {useState} from "react";
 import customAxios from "../axios/customAxios";
 import {useHistory} from "react-router-dom";
 
-//TODO: Implement show/hide
 const EditModal = ({product, show, setShowModal, getInfo}) => {
     const [itemName, setItemName] = useState(product.item_name)
     const [itemDesc, setItemDesc] = useState(product.item_desc)
