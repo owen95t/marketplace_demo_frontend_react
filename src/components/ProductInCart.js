@@ -38,7 +38,7 @@ const ProductInCart = ({product}) => {
                 {/*    Item name ALIGHT LEFT*/}
                     <strong className='text-start'>{product ? product.item_name : 'test'}</strong>
                     <p className='text-start'>Qty: {product.qty}</p>
-                    <BsTrash className='float-start' onClick={() => dispatch(removeItemFromCart(product))}/>
+                    <BsTrash className='float-start' onClick={() => dispatch(removeItemFromCart(product))} aria-label='Remove From Cart' style={{cursor: 'pointer'}}/>
                 </Col>
                 <Col>
                 {/*    Item Price Align RIGHT*/}

@@ -4,9 +4,8 @@ import Product from "../components/Product";
 import ProductCarousel from "../components/ProductCarousel";
 import '../css/home.css'
 import {useEffect} from "react";
-// import {useState} from "react";
 
-const Home = ({products, getProduct}) => {
+const Home = ({products, getProduct, isLoading}) => {
     useEffect(() => {
         getProduct()
     }, [])

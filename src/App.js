@@ -20,15 +20,18 @@ function App() {
   //const [loaded, setLoaded] = useState(false)
   const [products, setProducts] = useState([])
   const [showModal, setShowModal] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
   const auth = useSelector(isAuthenticated)
 
   const getProducts = async () => {
+    setIsLoading(true)
     await customAxios.get('items/getAll').then((response) => {
       if (!response) {
         alert('No items')
       }
       setProducts([...response.data])
+      setIsLoading(false)
     }).catch(e => {
       if (e) {
         alert('Something went wrong! ' + e)
@@ -77,6 +80,7 @@ function App() {
                         {...props}
                         products={products}
                         getProduct={getProducts}
+                        isLoading={isLoading}
                     />)}
             />
             <Route

@@ -3,7 +3,7 @@ const axios = require('axios');
 const customAxios = new axios.create({
     baseURL: 'https://mysterious-bayou-01036.herokuapp.com/', //'http://localhost:3000/',
     //for local testing
-    timeout: 5000,
+    timeout: 10000,
     withCredentials: true,
 })
 // customAxios.defaults.headers.common['Access-Control-Allow-Credentials'] = true;
