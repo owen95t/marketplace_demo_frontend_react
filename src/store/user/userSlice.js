@@ -83,7 +83,8 @@ export function userRegister(userData) {
             }
         }).catch(e => {
             if (e) {
-                alert('Error registering: ' + e)
+                alert(e.response.data.message)
+                console.log(e.response)
             }
         })
     };

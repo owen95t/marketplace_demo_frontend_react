@@ -2,26 +2,18 @@ import {Button, Form} from "react-bootstrap";
 import '../css/form.css'
 import {Link} from "react-router-dom";
 import {useState} from "react";
-import customAxios from "../axios/customAxios";
-import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {userRegister} from "../store/user/userSlice";
 
 const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const history = useHistory()
+    const dispatch = useDispatch()
 
-    const sendRegister = async () => {
-        await customAxios.post('users/register', {email: email, password: password}).then((result => {
-            if (result.status === 200) {
-                alert('Registration Successful!')
-                history.push('/login')
-            }
-        })).catch(e => {
-            if (e) {
-                console.log(e)
-                alert('Registration failed. Reason: ' + e.response.data.message)
-            }
-        })
+    const preDispatch = () => {
+        dispatch(userRegister({email: email, password: password}))
+        setEmail('')
+        setPassword('')
     }
 
     return (
@@ -45,7 +37,7 @@ const Register = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button className='mt-4' type="button" onClick={sendRegister}>
+                <Button className='mt-4' type="button" onClick={() => preDispatch()}>
                     Register
                 </Button>
                 <div>
