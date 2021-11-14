@@ -78,7 +78,7 @@ export function userLogout() {
 export function userRegister(userData) {
     return async function userRegisterThunk(dispatch) {
         await customAxios.post('users/register', {email: userData.email, password: userData.password }).then(response => {
-            if (response.status === 200) {
+            if (response.status === 201) {
                 alert('Registration Complete! Please log in.')
             }
         }).catch(e => {

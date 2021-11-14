@@ -12,7 +12,7 @@ import NewItemModal from "../components/NewItemModal";
 import {useHistory} from "react-router-dom";
 
 
-const Account = () => {
+const Account = ({setLoading}) => {
     const authed = useSelector(isAuthenticated)
     const history = useHistory()
     const [userItems, setUserItems] = useState([])
@@ -27,14 +27,17 @@ const Account = () => {
 
     const getUserItems = async () => {
         if (authed) {
+            setLoading(true)
             //user id is extracted from req.session on server side
             await customAxios.get('items/getUserItems').then(response => {
                 if (response.status === 200) {
                     setUserItems([...response.data])
                 }
+                setLoading(false)
             }).catch(e => {
                 console.log('Error retrieving your items' + e)
                 alert('Error retrieving your items!' + e)
+                setLoading(false)
             })
         }
         // else{ //if not logged in
@@ -46,7 +49,7 @@ const Account = () => {
 
     useEffect(() => {
         getUserItems()
-    }, [authed])
+    }, [])
 
     return (
         <Container className='mt-5'>

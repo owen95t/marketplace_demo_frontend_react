@@ -15,9 +15,9 @@ import ShippingAndCart from "./pages/ShippingAndCart";
 import {GuardedRoute, GuardProvider} from 'react-router-guards'
 import {isAuthenticated} from "./store/user/userSlice";
 import {useSelector} from "react-redux";
+import {Toast, ToastContainer} from "react-bootstrap";
 
 function App() {
-  //const [loaded, setLoaded] = useState(false)
   const [products, setProducts] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -36,6 +36,7 @@ function App() {
       if (e) {
         alert('Something went wrong! ' + e)
       }
+      setIsLoading(false)
     })
   }
 
@@ -70,6 +71,13 @@ function App() {
   return (
     <div className="App">
         <Navigational setShowModal={handleModal}/>
+      <ToastContainer position='top-center'>
+        <Toast show={isLoading} bg='warning' className='mt-5'>
+          <Toast.Body>
+            <strong>Loading...</strong>
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
         <CartModal showModal={showModal} setShowModal={handleModal}/>
         <GuardProvider guards={[requireLogin]}>
           <Switch>
@@ -89,20 +97,22 @@ function App() {
                     <ProductPage
                         {...props}
                         addToCart={handleAddToCart}
+                        setLoad={setIsLoading}
                     />)}
             />
             <Route
                 exact path='/login'
-                render={() => <Login />}/>
+                render={(props) => <Login {...props} setLoading={setIsLoading}/>}/>
             <Route
                 exact path='/register'
-                render={() => <Register />} />
+                render={(props) => <Register {...props} setLoading={setIsLoading}/>} />
             <GuardedRoute
                 path='/account'
                 meta={{auth: true}}
-                exact component={(props) =>
+                render={(props) =>
                     <Account
                         {...props}
+                        setLoading={setIsLoading}
                     />}
             />
             <Route

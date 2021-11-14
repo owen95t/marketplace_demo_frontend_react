@@ -9,7 +9,7 @@ import {userID} from "../store/user/userSlice";
 import EditModal from "../components/EditModal";
 
 //TODO: Implement rating
-const ProductPage = ({addToCart}) => {
+const ProductPage = ({addToCart, setLoad}) => {
     const params = useParams()
     const [product, setProduct] = useState()
     const [itemCount, setItemCount] = useState(1)
@@ -25,15 +25,18 @@ const ProductPage = ({addToCart}) => {
     }
 
     const getInfo = async () => {
+        setLoad(true)
         console.log('GetInfo called')
         console.log(params.id)
         await customAxios.get(`items/getID/${params.id}`).then(response => {
             setProduct(response.data)
             console.log(response.data)
+            setLoad(false)
         }).catch(e => {
             if (e) {
                 alert('Error getting product: ' + e)
             }
+            setLoad(false)
         })
     }
 

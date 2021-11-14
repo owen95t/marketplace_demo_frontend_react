@@ -5,15 +5,17 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {userRegister} from "../store/user/userSlice";
 
-const Register = () => {
+const Register = ({setLoading}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
 
     const preDispatch = () => {
+        setLoading(true)
         dispatch(userRegister({email: email, password: password}))
         setEmail('')
         setPassword('')
+        setLoading(false)
     }
 
     return (

@@ -7,7 +7,7 @@ import {userLogin} from "../store/user/userSlice";
 import {isAuthenticated} from "../store/user/userSlice";
 import {useHistory} from "react-router-dom";
 
-const Login = () => {
+const Login = ({setLoading}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const history = useHistory()
@@ -16,9 +16,15 @@ const Login = () => {
 
     useEffect(() => {
         if (authed) {
+            setLoading(false)
             history.push('/account')
         }
     },[authed])
+
+    const preDispatch = () => {
+        setLoading(true)
+        dispatch(userLogin({email: email, password: password}))
+    }
 
     return (
         <div className='Login'>
@@ -41,7 +47,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button className='mt-4' type="button" onClick={() => dispatch(userLogin({email: email, password: password}))}>
+                <Button className='mt-4' type="button" onClick={() => preDispatch()}>
                     Login
                 </Button>
                 <div className='mt-2'>
