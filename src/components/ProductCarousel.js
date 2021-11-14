@@ -30,7 +30,7 @@ const ProductCarousel = ({products}) => {
                 showDots={false}
                 responsive={responsive}
                 //ssr={true} // means to render carousel on server-side.
-                infinite={true}
+                infinite={false}
                 autoPlay={false} //may change to true of false depending
                 autoPlaySpeed={1000}
                 keyBoardControl={true}
