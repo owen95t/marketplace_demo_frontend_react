@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const customAxios = new axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'https://mysterious-bayou-01036.herokuapp.com/', //'http://localhost:3000/',
     //for local testing
     timeout: 5000,
     withCredentials: true,
