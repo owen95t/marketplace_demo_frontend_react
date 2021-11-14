@@ -6,7 +6,7 @@ const customAxios = new axios.create({
     timeout: 5000,
     withCredentials: true,
 })
-customAxios.defaults.headers.common['Access-Control-Allow-Credentials'] = true;
+// customAxios.defaults.headers.common['Access-Control-Allow-Credentials'] = true;
 customAxios.defaults.withCredentials = true
 // customAxios.interceptors.request.use((request) => {
 //         //request
