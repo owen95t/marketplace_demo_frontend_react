@@ -9,12 +9,10 @@ import customAxios from "../axios/customAxios";
 import Product from "../components/Product";
 import blankProfileImage from '../blank_profile.png'
 import NewItemModal from "../components/NewItemModal";
-import {useHistory} from "react-router-dom";
 
 
 const Account = ({setLoading}) => {
     const authed = useSelector(isAuthenticated)
-    const history = useHistory()
     const [userItems, setUserItems] = useState([])
     const email = useSelector(userEmail)
     const address = useSelector(userAddress)

@@ -1,6 +1,6 @@
 import './App.css';
 import Navigational from "./components/Navigational";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import Home from "./pages/Home";
 import {useEffect, useState} from "react";
 import ProductPage from "./pages/ProductPage";
@@ -93,7 +93,7 @@ function App() {
             />
             <Route
                 exact path='/product/:id'
-                exact render={(props) => (
+                render={(props) => (
                     <ProductPage
                         {...props}
                         addToCart={handleAddToCart}
