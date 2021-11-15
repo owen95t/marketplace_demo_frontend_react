@@ -1,3 +1,15 @@
+# Marketplace Demo
+
+----
+
+## Deployed [here]('https://market-demo-1123.herokuapp.com/') on Heroku
+
+----
+
+## Info [here]('https://lizard-driver-511.notion.site/Shippop-Test-Pongwut-Tangjintanakarn-fd56ea8ab23b4730b2502695e26728aa')
+
+----
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
