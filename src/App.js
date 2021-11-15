@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
         <Navigational setShowModal={handleModal}/>
-      <ToastContainer position='top-center'>
+      <ToastContainer position='top-center' style={{zIndex: '999'}}>
         <Toast show={isLoading} bg='warning' className='mt-5'>
           <Toast.Body>
             <strong>Loading...</strong>
