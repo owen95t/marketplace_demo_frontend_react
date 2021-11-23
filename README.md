@@ -8,7 +8,10 @@
 
 ----
 
-## Info [here](https://lizard-driver-511.notion.site/Shippop-Test-Pongwut-Tangjintanakarn-fd56ea8ab23b4730b2502695e26728aa)
+##Screenshots [here](https://lizard-driver-511.notion.site/Screenshots-of-Marketplace-Demo-d357f8d540d547eebf12237b6ce17e39)
+
+## Backend [here](https://github.com/owen95t/marketplace_demo_backend)
+[comment]: <> (Info [here](https://lizard-driver-511.notion.site/Shippop-Test-Pongwut-Tangjintanakarn-fd56ea8ab23b4730b2502695e26728aa)
 
 ----
 
