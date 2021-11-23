@@ -2,7 +2,9 @@
 
 ----
 
-## Deployed [here](https://market-demo-1123.herokuapp.com/) on Heroku
+## Deployed [here](https://market-demo-1123.netlify.app/) on Netlify
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/96fafa9d-8c9d-4b30-98cc-b4f3c0ddf5ad/deploy-status)](https://app.netlify.com/sites/market-demo-1123/deploys)
 
 ----
 
